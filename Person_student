@@ -1,0 +1,201 @@
+abstract class Person{
+	private String name;
+	private String Address;
+	private int age;
+	private String phone;
+	private String dob;
+	
+	public Person(String name, String Address, int age, String phone, String dob)
+	{
+	  this.name = name;
+	 this.Address = Address;
+	 this.age = age;
+	 this.phone = phone;
+	 this.dob = dob;
+	}
+
+	
+public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		return Address;
+	}
+	public void setAddress(String address) {
+		this.Address = address;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+    @Override
+    public java.lang.String toString() {
+    	return "Name ="+name+"\nADDRESS ="+Address+"\nDOB ="+dob+"\n";
+    }
+    abstract public void qualification();
+}
+
+class Student extends Person{
+
+	private int rollNo;
+	private String course;
+	
+	public Student(String name, String Address, int age, String phone, String dob, int rollNo, String course) {
+		super(name, Address, age, phone, dob);
+		this.rollNo = rollNo;
+		this.course = course;
+	}
+
+	public int getRollNo() {
+		return rollNo;
+	}
+
+	public void setRollNo(int rollNo) {
+		this.rollNo = rollNo;
+	}
+
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+@Override
+	public java.lang.String toString() {
+		return "Student\n"+super.toString()+"ROLLNUMBER="+rollNo+"\nCOURSE=\t"+course;
+	}
+	
+@Override
+public void qualification() {
+	System.out.println("Student is in 12th class");
+}
+public void dressColor() {
+	System.out.println("Student DressColor is Back&White Formal");
+}
+}
+abstract class Employee extends Student{
+
+int id;
+String salary;
+public Employee(String name, String Address, int age, String phone, String dob, int id, String salary) {
+	super(name, Address, age, phone, dob, id, salary);
+	this.id=id;
+	this.salary=salary;
+}
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+public String getSalary() {
+	return salary;
+}
+public void setSalary(String salary) {
+	this.salary = salary;
+}
+@Override
+public java.lang.String toString() {
+	return "Employee \n"+super.toString()+"ID ="+id+"\nSALARY = "+salary;
+	
+}
+@Override
+public void qualification() {
+	System.out.println("Employee is Graduate");
+}
+	
+}
+class FullTimeEmployee extends Employee{
+	private int Time;
+	public FullTimeEmployee(String name, String Address, int age, String phone, String dob, int id, String salary, int Time) {
+		super(name, Address, age, phone, dob, id, salary);
+		this.Time=Time;
+	}
+	
+public int getTime() {
+		return Time;
+	}
+
+	public void setTime(int time) {
+		Time = time;
+	}
+
+@Override
+public java.lang.String toString() {
+	return "FullTimeEmployee\n"+super.toString()+"\nTime ="+Time;
+}		
+public void uniform() {
+	System.out.println("Employee Uniform is Black&White");
+}
+}
+class PartTimeEmployee extends Employee{
+	private int Time;
+	public PartTimeEmployee(String name, String Address, int age, String phone, String dob, int id, String salary, int Time) {
+		super(name, Address, age, phone, dob, id, salary);
+		this.Time=Time;
+	}
+	public int getTime() {
+		return Time;
+	}
+	public void setTime(int time) {
+		this.Time = time;
+	}
+	@Override
+	public java.lang.String toString() {
+		return "ParttTimeEmployee\n"+super.toString()+"\nTime = "+Time;
+	}
+public void dress(){
+	System.out.println("PartTime Employeee dress is Casual");
+}
+}
+
+class Call{
+	static void call(Person person) {//UpCasting
+		System.out.println(person);
+		person.qualification();
+		if(person instanceof Student) {//DownCasting
+			Student student =(Student)person;
+			student.dressColor();
+		}
+		else if(person instanceof FullTimeEmployee) {
+			FullTimeEmployee emp = (FullTimeEmployee)person;
+			emp.uniform();
+		}
+		else if(person instanceof PartTimeEmployee) {
+			PartTimeEmployee emp2=(PartTimeEmployee)person;
+			emp2.dress();
+		}
+		
+		System.out.println("************************************");
+		
+	}
+}
+public class ISA_M2 {
+
+	public static void main(String[] args) {
+		
+		Call.call(new Student("Anand Gautam","Ghaziabad",20,"7534909157","02/10/2001",10,"B.tech"));
+		
+		
+
+	}
+
+}
